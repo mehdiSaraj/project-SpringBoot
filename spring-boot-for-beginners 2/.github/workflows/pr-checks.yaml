@@ -1,0 +1,24 @@
+name: Pull Request Checks
+
+on: # when we do trigger
+    pull_request:
+        branches:
+            - main
+
+jobs:
+    unit-tests:
+        name: Run Unit Tests
+        runs-on: ubuntu-latest    # create instance servier so we can activit all job om this instance #self host choose machine to activit job
+        steps: 
+         - name: Checkout code
+           uses: actions/checkout@v3
+
+         - name: stup JDK 17
+           uses: action/setup-java@v3 # go to jave and grt this ditribution
+           with:
+            distribution: 'corretto'
+            java-version: 17
+         - name: Run Unit Tests
+           run: mvn -B test --file pom.xml
+
+
